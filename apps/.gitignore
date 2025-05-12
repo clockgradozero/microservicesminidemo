@@ -1,2 +1,50 @@
-# Ignora todos los node_modules en cualquier subdirectorio
+# Node modules en cualquier parte del proyecto
 **/node_modules/
+
+# Salidas de build de NestJS (por defecto en dist/)
+**/dist/
+**/build/
+
+# Archivos temporales del sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Entornos locales
+.env
+.env.* # Para .env.development, .env.production, etc.
+
+# Cache de paquetes
+**/.npm
+**/.yarn
+**/.pnpm
+.pnpm-debug.log
+
+# IDEs y editores
+.vscode/
+.idea/
+*.swp
+
+# Coverage (si usas Jest para pruebas)
+**/coverage/
+coverage-final.json
+
+# Archivos de configuración locales
+*.local
+
+# TypeScript build info
+**/*.tsbuildinfo
+
+# Submódulos corruptos
+**/.gitmodules
+**/.git
+
+# NX (si usas NX monorepo)
+nx-cache/
