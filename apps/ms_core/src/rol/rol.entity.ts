@@ -1,12 +1,12 @@
-import { Entity, Column, PrimaryColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity({ schema: 'cor', name: 'rol' }) 
+@Entity({ name: 'rol', schema: process.env.DB_SCHEMA || 'esc' })
 export class Rol {
-  
-  @PrimaryColumn({ name: 'id_rol' }) 
+  @PrimaryGeneratedColumn()
   id_rol: number;
 
-  @Column({ name: 'nombre_rol' }) 
-  nombreRol: string;
+  @Column()
+  nombre: string;
 
+  // Agrega más columnas si es necesario
 }

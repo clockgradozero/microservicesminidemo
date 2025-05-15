@@ -1,28 +1,33 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Rol } from './rol/rol.entity';
-import { Persona } from './persona/persona.entity';
-import { Alumno } from './alumno/alumno.entity';
-import { RolController } from './rol/rol.controller';
-import { PersonaController } from './persona/persona.controller';
-import { AlumnoController } from './alumno/alumno.controller';
-
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AlumnoModule } from './alumno/alumno.module';
+import { PersonaModule } from './persona/persona.module';
+import { RolModule } from './rol/rol.module';
 
 @Module({
-  controllers: [RolController, PersonaController, AlumnoController],
-  imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: '212.227.239.166',
-      port: 5432,
-      username: 'demonest',
-      password: 'D3m0N3st',
-      database: 'ms_core',
-      schema: 'cor',
-      synchronize: false,
-      autoLoadEntities: true,
+  imports: [    
+    ConfigModule.forRoot({
+      isGlobal: true
     }),
-    TypeOrmModule.forFeature([Rol, Persona, Alumno]),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => ({ 
+        type: 'postgres',
+        host: config.get<string>('DB_HOST'),
+        port: +(config.get<number>('DB_PORT') ?? 5432),
+        username: config.get<string>('DB_USERNAME'),
+        password: config.get<string>('DB_PASSWORD'),
+        database: config.get<string>('DB_NAME'),
+        schemas: ['cor'],
+        autoLoadEntities: true,
+        synchronize: false,
+      }),
+    }),    
+    AlumnoModule,
+    PersonaModule,
+    RolModule
   ],
 })
 export class AppModule {}

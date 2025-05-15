@@ -4,7 +4,8 @@ const core_1 = require("@nestjs/core");
 const app_module_1 = require("./app.module");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
-    await app.listen(3000);
+    //await app.listen(80, '0.0.0.0'); // HTTPS, si usas certificado SSL nativo
+    await app.listen(3000, '0.0.0.0');
 }
 bootstrap();
 //# sourceMappingURL=main.js.map

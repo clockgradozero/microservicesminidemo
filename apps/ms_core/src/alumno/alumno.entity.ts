@@ -1,20 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
-import { Persona } from '../persona/persona.entity';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-
-@Entity({ schema: 'cor', name: 'alumno' })
+@Entity({ name: 'alumno', schema: process.env.DB_SCHEMA || 'esc' })
 export class Alumno {
-  @PrimaryGeneratedColumn({ name: 'id_alumno' })
+  @PrimaryGeneratedColumn()
   id_alumno: number;
 
   @Column()
-  matricula: string;
+  nombre: string;
 
-  @OneToOne(() => Persona)
-  @JoinColumn({ name: 'id_persona', referencedColumnName: 'id_persona' })
-  persona: Persona;
-
-  @Column({ name: 'id_grupo', nullable: true }) // <- Relación lógica
-  id_grupo: number;
-
+  // Agrega más columnas si es necesario
 }

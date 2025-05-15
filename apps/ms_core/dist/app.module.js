@@ -9,15 +9,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const rol_entity_1 = require("./rol.entity");
-const persona_entity_1 = require("./persona.entity");
-const core_controller_1 = require("./core.controller");
+const rol_entity_1 = require("./rol/rol.entity");
+const persona_entity_1 = require("./persona/persona.entity");
+const alumno_entity_1 = require("./alumno/alumno.entity");
+const rol_controller_1 = require("./rol/rol.controller");
+const persona_controller_1 = require("./persona/persona.controller");
+const alumno_controller_1 = require("./alumno/alumno.controller");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        controllers: [core_controller_1.CoreController],
+        controllers: [rol_controller_1.RolController, persona_controller_1.PersonaController, alumno_controller_1.AlumnoController],
         imports: [
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'postgres',
@@ -30,7 +33,7 @@ exports.AppModule = AppModule = __decorate([
                 synchronize: false,
                 autoLoadEntities: true,
             }),
-            typeorm_1.TypeOrmModule.forFeature([rol_entity_1.Rol, persona_entity_1.Persona]),
+            typeorm_1.TypeOrmModule.forFeature([rol_entity_1.Rol, persona_entity_1.Persona, alumno_entity_1.Alumno]),
         ],
     })
 ], AppModule);

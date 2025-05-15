@@ -1,17 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany, OneToOne, PrimaryColumn } from 'typeorm';
-import { Rol } from '../rol/rol.entity';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity({ schema: 'cor', name: 'persona' })
+@Entity({ name: 'persona', schema: process.env.DB_SCHEMA || 'esc' })
 export class Persona {
-
-  @PrimaryColumn({ name: 'id_persona' })
+  @PrimaryGeneratedColumn()
   id_persona: number;
 
   @Column()
   nombre: string;
- 
-  @ManyToOne(() => Rol, {eager: true} )
-  @JoinColumn({ name: 'id_rol', referencedColumnName: 'id_rol' }) // 👈 clave
-  rol: Rol;
 
+  // Agrega más columnas si es necesario
 }

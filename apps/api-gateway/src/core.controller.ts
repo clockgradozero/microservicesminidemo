@@ -35,19 +35,25 @@ export class CoreController {
   }
 
   @Get('alumno/:id')
-  async getAlumnoConGrupo(@Param('id') id: number) {
-    const alumno = await firstValueFrom(
-      this.clientCore.send({ cmd: 'get-alumno-by-id' }, id),
-    );
+async getAlumnoConGrupo(@Param('id') id: number) {
+  const alumno = await firstValueFrom(
+    this.clientCore.send({ cmd: 'get-alumno-by-id' }, id),
+  );
 
-    const grupo = alumno.id_grupo
-      ? await firstValueFrom(this.clientEscuela.send({ cmd: 'get-grupo-by-id' }, alumno.id_grupo))
-      : null;
-
-    return {
-      ...alumno,
-      grupo,
-    };
+  if (!alumno) {
+    return { error: `Alumno con id ${id} no encontrado` };
   }
+
+  const grupo = alumno.id_grupo
+    ? await firstValueFrom(
+        this.clientEscuela.send({ cmd: 'get-grupo-by-id' }, alumno.id_grupo)
+      )
+    : null;
+
+  return {
+    ...alumno,
+    grupo,
+  };
+}
 
 }
