@@ -11,6 +11,12 @@ export class SpController {
   @MessagePattern({ cmd: 'get-edad-alumno' })
     async getEdadAlumno(@Payload() id_alumno: number): Promise<number> {
     return this.spService.getEdadAlumno(id_alumno);
-    }
+  }
+  
+  @MessagePattern({ cmd: 'get-alumno' })
+    async getAlumno(@Payload() id_alumno: number): Promise<number> {
+    return this.spService.getAlumno(id_alumno);
+  }
+  
 
 }

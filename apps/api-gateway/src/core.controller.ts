@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { ClientProxy, ClientProxyFactory, Transport } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
 
@@ -55,5 +55,17 @@ async getAlumnoConGrupo(@Param('id') id: number) {
     grupo,
   };
 }
+
+  @Get('edad')
+  async getEdad(@Query('id') id: number): Promise<number> {
+    const edad = this.clientCore.send<number>({ cmd: 'get-edad-alumno' }, Number(id));
+    return await firstValueFrom(edad); // esperar y obtener el resultado
+  }
+  
+  @Get('get-alumno')
+  async getAlumno(@Query('id') id: number): Promise<number> {
+    const result = this.clientCore.send<number>({ cmd: 'get-alumno' }, Number(id));
+    return await firstValueFrom(result); // esperar y obtener el resultado
+  }
 
 }

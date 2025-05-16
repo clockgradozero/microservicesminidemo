@@ -23,7 +23,7 @@ import { GrupoModule } from './grupo/grupo.module';
         synchronize: false,
       }),
     }),    
-    GrupoModule,
+    GrupoModule
   ],
 })
 export class AppModule {}

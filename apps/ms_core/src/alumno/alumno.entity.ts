@@ -1,12 +1,12 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity({ name: 'alumno', schema: process.env.DB_SCHEMA || 'esc' })
+@Entity({ name: 'alumno', schema: process.env.DB_SCHEMA || 'cor' })
 export class Alumno {
   @PrimaryGeneratedColumn()
   id_alumno: number;
 
   @Column()
-  nombre: string;
+  matricula: string;
 
   // Agrega más columnas si es necesario
 }

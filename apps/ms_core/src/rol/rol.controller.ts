@@ -12,7 +12,7 @@ export class RolController {
     return this.rolService.getRolById(id_rol);
   }
 
-  @MessagePattern({ cmd: 'get-rols' })
+  @MessagePattern({ cmd: 'get-roles' })
   async getRols(): Promise<Rol[]> {
     return this.rolService.getRols();
   }

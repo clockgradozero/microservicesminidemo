@@ -18,5 +18,10 @@ export class GrupoController {
   async getGrupoById(@Payload() id_grupo: number): Promise<Grupo | null> {
     return this.grupoService.getGrupoById(id_grupo);
   }
+
+  @MessagePattern({ cmd: 'get-alumno-by-grupo' })
+    async getAlumnoByGrupo(@Payload() id_grupo: number): Promise<number> {
+    return this.grupoService.getAlumnoByGrupo(id_grupo);
+  }
   
 }
